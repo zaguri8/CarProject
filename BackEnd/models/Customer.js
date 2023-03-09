@@ -56,17 +56,48 @@ const CustomerScheme = new mongoose.Schema({
         type: String,
         required: true
     },
-    customer_address: {
-        type: String,
-        required: true
+    payment_info: {
+        required: false,
+        card_number: {
+            type: String,
+            required: true
+        },
+        card_holder_name: {
+            type: String,
+            required: true
+        },
+        card_expiration_date: {
+            type: String,
+            required: true
+        },
+        card_cvv: {
+            type: String,
+            required: true
+        },
+        comments: {
+            type: String,
+            required: false
+        }
     },
     customer_type: {
         type: String,
         required: true
     },
+    license_image: {
+        type: String,
+        required: false
+    },
+    passport_image: {
+        type: String,
+        required: false
+    },
     customer_company_name: {
         type: String,
         required: false
+    },
+    customer_branch: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Branch',
     },
     customer_company_id: {
         type: String,
@@ -74,6 +105,4 @@ const CustomerScheme = new mongoose.Schema({
     },
 })
 
-const CustomerModel = mongoose.model("Customer", CustomerScheme)
-
-module.exports = CustomerModel
+module.exports = mongoose.models.Customer || mongoose.model("Customer", CustomerScheme)

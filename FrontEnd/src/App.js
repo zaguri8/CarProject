@@ -7,17 +7,30 @@ import Journal from "./components/Journal"
 import { Route, Routes } from "react-router-dom"
 import AddCustomer from './components/AddCustomer';
 import CarManagement from './components/CarManagement';
+import ManagerLogin from './components/ManagerLogin';
+import { useAppContext } from './context/AppContext';
 
-import { useState } from 'react';
-
-
-//  async function getData(){
-//    const res = await fetch('http://localhost:3000');
-//    console.log(res.body);
-// }
 
 
 function App() {
+
+  const { manager } = useAppContext()
+
+  if (!manager) {
+    return (
+      <>
+        <NavbarComp />
+        <div className="container">
+          <Routes>
+            <Route>
+              <Route path="/Login" element={<ManagerLogin />} />
+            </Route>
+          </Routes>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <NavbarComp />
@@ -25,6 +38,7 @@ function App() {
         <Routes>
           <Route>
             <Route path="/MyCustomers" element={<Customers />} />
+            <Route path="/Login" element={<ManagerLogin />} />
             <Route path="/AddCustomer" element={<AddCustomer />} />
             <Route path="/CarManagement" element={<CarManagement />} />
             <Route path="/myCars" element={<Cars />} />

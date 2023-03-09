@@ -7,9 +7,9 @@ const CarScheme = new mongoose.Schema({
         required: true
     },
     car_rented_by: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: false,
-        default: 'null'
+        ref: 'Customer',
     },
     car_type: {
         type: String,
@@ -23,9 +23,27 @@ const CarScheme = new mongoose.Schema({
         type: String,
         required: true
     },
-    car_model_id: {
+    car_passkey: {
         type: String,
         required: true
+    },
+    car_towing_company: {
+        type: String,
+        required: true
+    },
+    car_agent: {
+        name: {
+            type: String,
+            required: true
+        },
+        phone: {
+            type: String,
+            required: true
+        },
+        price: {
+            type: String,
+            required: true
+        }
     },
     car_manufacture_year: {
         type: String,
@@ -103,6 +121,4 @@ const CarScheme = new mongoose.Schema({
 })
 
 
-const CarModel = mongoose.model("Car", CarScheme)
-
-module.exports = CarModel
+module.exports = mongoose.models.Car || mongoose.model("Car", CarScheme)

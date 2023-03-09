@@ -1,31 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 import AddCustomer from './AddCustomer';
 
 
 
 export default function Customers() {
-    const [customers, setCustomers] = useState([
-        {
-            id: '1',
-            joinDate: '01/01/2023',
-            customerType: 1,
-            firstName: 'הדס'
-        },
-        {
-            id: '2',
-            joinDate: '01/01/2023',
-            customerType: 2,
-            firstName: 'דאסי'
-        }
-    ]);
+    const { customers } = useAppContext()
 
     const onCustomerDelete = (customer) => {
         const customersWithoutDeletedCustomer = customers.filter((c) => {
-            if(customer.id === c.id) return false;
+            if (customer.id === c.id) return false;
             return true;
         })
-        setCustomers(customersWithoutDeletedCustomer);
     }
 
     return (

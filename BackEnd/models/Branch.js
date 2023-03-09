@@ -7,17 +7,15 @@ const BranchScheme = new mongoose.Schema({
         type: Number,
         required: true
     },
-    branch_name: { // Herzeliya
+    branch_name: {
         type: String,
         required: true
     },
-    branch_manager: { // 125j12lk5n12lk -> Manager: moshe
+    branch_manager: {
         type: mongoose.Types.ObjectId,
         ref: 'Manager',
         required: true
     }
 })
 
-const BranchModel = mongoose.model("Branch", BranchScheme)
-
-module.exports = BranchModel
+module.exports = mongoose.models.Branch || mongoose.model("Branch", BranchScheme)

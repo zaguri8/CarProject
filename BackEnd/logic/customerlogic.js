@@ -11,7 +11,7 @@ const editCustomer = async (customer) => {
 }
 
 const deleteCustomer = async (customer) => {
-    await CustomerModel.findByIdAndDelete(customer._id)
+    await CustomerModel.findByIdAndDelete(customer)
     return customer
 }
 
@@ -20,10 +20,15 @@ const getAllCustomers = async () => {
     return customers
 }
 
+const getAllCustomersForBranch = async (branch) => {
+    const customers = await CustomerModel.find({ branch })
+    return customers
+}
 
 module.exports = {
     addNewCustomer,
     editCustomer,
     deleteCustomer,
+    getAllCustomersForBranch,
     getAllCustomers
 }

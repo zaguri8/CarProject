@@ -1,4 +1,4 @@
-const { getBranches, editBranch, deleteBranch } = require('../logic/branchlogic')
+const { getBranches, editBranch, deleteBranch, getBranch } = require('../logic/branchlogic')
 
 const express = require('express'), router = express.Router()
 
@@ -6,6 +6,17 @@ const express = require('express'), router = express.Router()
 router.get('/', async (req, res) => {
     try {
         const branches = await getBranches()
+        res.status(200).send(branches)
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
+
+
+// GET : /branch/
+router.get('/byId/:id', async (req, res) => {
+    try {
+        const branches = await getBranch(req.params.id)
         res.status(200).send(branches)
     } catch (error) {
         res.status(500).send(error.message)
@@ -33,9 +44,9 @@ router.put('/', async (req, res) => {
 })
 
 // DELETE : /branch/
-router.delete('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const deletedBranch = await deleteBranch(req.body)
+        const deletedBranch = await deleteBranch(req.params.id)
         res.status(200).send(deletedBranch)
     } catch (error) {
         res.status(500).send(error.message)

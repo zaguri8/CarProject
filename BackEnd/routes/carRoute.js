@@ -63,9 +63,9 @@ router.put('/', async (req, res) => {
 })
 
 // DELETE : /cars/
-router.delete('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const deletedCar = await deleteCar(req.body)
+        const deletedCar = await deleteCar(req.params.id)
         res.status(200).send(deletedCar)
     } catch (error) {
         res.status(500).send(error.message)
