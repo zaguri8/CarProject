@@ -14,7 +14,6 @@ exports.populate = async () => {
     console.log("Deleted all collections")
 
 
-
     const manager = new Manager({
         manager_email: "efrataslan@gmail.com",
         manager_password: "123456",
@@ -109,8 +108,8 @@ exports.populate = async () => {
         car_rental_price: "0",
     })
 
-    
-    manager.branch = branch._id
+
+    manager.manager_branch = branch._id
 
     await manager.save()
     await branch.save()

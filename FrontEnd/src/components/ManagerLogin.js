@@ -6,6 +6,8 @@ import './ManagerLogin.css'
 
 const ManagerLogin = () => {
 
+
+
     const fields = [
         { name: "email", type: "text", required: true },
         { name: "password", type: "password", required: true },
@@ -18,7 +20,7 @@ const ManagerLogin = () => {
 
     return (
         <div className="managerLogin">
-            <h1>Manager Login</h1>
+            <h1>התחברות מנהלים</h1>
             <Form fields={fields} onSubmit={login} />
         </div>
     )

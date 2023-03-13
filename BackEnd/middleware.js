@@ -13,6 +13,7 @@ const validateToken = async (req, res, next) => {
         token = token.split('Bearer ')[1]
         const verified = jwt.verify(token, process.env.SECRET)
         const user = await ManagerModel.findById(verified._id)
+            .populate("manager_branch")
         req.user = user
         next()
     } catch (error) {

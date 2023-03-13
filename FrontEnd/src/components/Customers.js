@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import AddCustomer from './AddCustomer';
 
@@ -7,7 +7,7 @@ import AddCustomer from './AddCustomer';
 
 export default function Customers() {
     const { customers } = useAppContext()
-
+    const nav = useNavigate()
     const onCustomerDelete = (customer) => {
         const customersWithoutDeletedCustomer = customers.filter((c) => {
             if (customer.id === c.id) return false;
@@ -15,19 +15,22 @@ export default function Customers() {
         })
     }
 
+
+
+    const onCustomerDetails = (customer) => {
+        nav("/CustomerDetails/" + customer._id)
+    }
+    if (!customers)
+        return <div>
+            No Customers
+        </div>
     return (
         <div>
             <h1>לקוחות</h1>
             <table>
                 <thead>
                     <th>
-
-                    </th>
-                    <th>
-                        תאריך הצטרפות
-                    </th>
-                    <th>
-                        סוג לקוח
+                        פעולות
                     </th>
                     <th>
                         שם פרטי
@@ -41,35 +44,38 @@ export default function Customers() {
                     <th>
                         טלפון נייד
                     </th>
-
                 </thead>
                 <tbody>
                     {customers.map((customer) => {
                         return <tr key={customer.id}>
                             <td>
                                 <button onClick={(evt) => {
+                                    onCustomerDetails(customer);
+                                }}>
+                                    פרטים
+                                </button>
+                                <button onClick={(evt) => {
                                     onCustomerDelete(customer);
                                 }}>
-                                    מחק
+                                    עריכה
+                                </button>
+                                <button onClick={(evt) => {
+                                    onCustomerDelete(customer);
+                                }}>
+                                    מחיקה
                                 </button>
                             </td>
                             <td>
-                                {customer.joinDate}
+                                {customer.customer_first_name}
                             </td>
                             <td>
-                                {customer.customerType}
+                                {customer.customer_last_name}
                             </td>
                             <td>
-                                {customer.firstName}
+                                {customer.customer_passport_id}
                             </td>
                             <td>
-                                {customer.lastName}
-                            </td>
-                            <td>
-                                {customer.id}
-                            </td>
-                            <td>
-                                {customer.mobilePhone}
+                                {customer.customer_phone}
                             </td>
                         </tr>
                     })}

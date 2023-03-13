@@ -69,7 +69,7 @@ const deleteCar = async (car) => {
 }
 
 const getAllCarsForBranch = async (branch) => {
-    const response = await http.get(`/cars/${branch}`)
+    const response = await http.get(`/cars/byBranch/${branch}`)
     return response.data
 }
 
